@@ -1,22 +1,23 @@
-fn main() {
-    // Definition
-    let x:i8 = 10;
-    println!("{x}");
-    // Mutability
-    let mut y:i16 = 1500;
-    println!("{y}");
-    y = 41;
-    println!("{y}");
+use std::fmt::{self};
 
-    //scope
-    {
-        let z:i32 = 5600000;
-        println!("{z}");
+#[derive(Debug)]
+struct User {
+    name: &'static str,
+    sign_in_count: i64
+}
+
+impl fmt::Display for User{
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f,"{}:{}",self.name,self.sign_in_count)?;
+
+        write!(f, "\nHello World")
     }
+} 
 
-    //shadowing
-    let t = 10;
-    println!("{t}");
-    let t = t+10;
-    println!("{t}");
+
+fn main() {
+    let user:User = User{sign_in_count: 56, name: "Tanay"};
+    // user.sign_in_count = 5;
+    println!("{}",user);
+    println!("{:?}", user);
 }
