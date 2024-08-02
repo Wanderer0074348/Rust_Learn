@@ -12,3 +12,5 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+/home/tanaym/Documents/rust_codes/The Rust Programming Language.pdf
