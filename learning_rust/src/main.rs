@@ -1,23 +1,28 @@
-use std::fmt::{self};
 
-#[derive(Debug)]
-struct User {
-    name: &'static str,
-    sign_in_count: i64
+
+fn main(){
+    let mut s = String::from("Hello");
+
+    let mut x = print_world(&mut s);
+    println!("{:?}",x);
+    let y = get_first_word(&mut x);
+    println!("{}",y);
+    let z = String::from("Value101");
+    let a = &z[..3];
+    println!("{:?}",a);
 }
 
-impl fmt::Display for User{
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f,"{}:{}",self.name,self.sign_in_count)?;
+fn print_world(s: &mut String)-> &mut String{
+    s.push_str(" World!");
+    return s
+}
 
-        write!(f, "\nHello World")
+fn get_first_word(s: &mut String)-> &str{
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate(){
+        if item == b' '{
+            return &s[..i];
+        }
     }
-} 
-
-
-fn main() {
-    let user:User = User{sign_in_count: 56, name: "Tanay"};
-    // user.sign_in_count = 5;
-    println!("{}",user);
-    println!("{:?}", user);
+    s
 }
