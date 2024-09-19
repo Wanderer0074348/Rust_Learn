@@ -1,15 +1,37 @@
-
+#[derive(Debug)]
+struct Student{
+    id:u32,
+    name: String
+}
 
 fn main(){
     let mut s = String::from("Hello");
 
-    let mut x = print_world(&mut s);
-    println!("{:?}",x);
-    let y = get_first_word(&mut x);
-    println!("{}",y);
-    let z = String::from("Value101");
-    let a = &z[..3];
-    println!("{:?}",a);
+    // Cannot create references of the same varaibles multiple times, so you change the scope of the variable to create simultaneous references
+    {
+        let x = print_world(&mut s);
+        println!("{:?}",x);
+    }
+    let y = get_first_word(&mut s);
+
+    println!("{:?}",y);
+
+    let mut name = String::from("User");
+    let s = details(5, &mut name);
+
+    println!("{:?}",s);
+
+    print_details(s);
+}
+
+fn print_details(s:Student)->(){
+    println!("{}",s.id);
+    println!("{}",s.name);
+}
+
+
+fn details(id:u32,s: &mut String)->Student{
+    Student { id, name: s.to_string() }
 }
 
 fn print_world(s: &mut String)-> &mut String{
