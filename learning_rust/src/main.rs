@@ -4,6 +4,11 @@ struct Student{
     name: String
 }
 
+impl Student{
+    fn display(&self)->(){
+        println!("Id:{}; Name:{}",self.id,self.name);
+    }
+}
 fn main(){
     let mut s = String::from("Hello");
 
@@ -19,16 +24,8 @@ fn main(){
     let mut name = String::from("User");
     let s = details(5, &mut name);
 
-    println!("{:?}",s);
-
-    print_details(s);
+    s.display();
 }
-
-fn print_details(s:Student)->(){
-    println!("{}",s.id);
-    println!("{}",s.name);
-}
-
 
 fn details(id:u32,s: &mut String)->Student{
     Student { id, name: s.to_string() }
