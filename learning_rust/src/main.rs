@@ -1,13 +1,36 @@
 #[derive(Debug)]
 struct Student{
     id:u32,
-    name: String
+    name: String,
+    physics: u32,
+    math: u32,
+    chemistry: u32,
+    biology: u32,
 }
 
 impl Student{
     fn display(&self) -> (){
-        println!("ID: {}\nName: {}",self.id,self.name);
+        println!("ID: {}\nName: {}\nTotal score: {}/100",self.id,self.name,self.score());
     }
+
+    fn score(&self) -> u32{
+        (self.biology+self.chemistry+self.math+self.physics)/4
+    }
+    
+    fn update(&mut self,subject:&str,score:u32) -> (){
+        if subject == "physics"{
+            self.physics = score;
+        }
+        else if subject == "math"{
+            self.math = score;
+        }
+        else if subject == "chemistry"{
+            self.chemistry = score;
+        }
+        else if subject == "biology"{
+            self.biology = score;
+        }
+    }   
 }
 fn main(){
     let mut s = String::from("Hello");
@@ -22,16 +45,19 @@ fn main(){
     println!("{:?}",y);
 
     let mut name = String::from("User");
-    let s = details(5, &mut name);
+    let mut s = details(5, &mut name,88,99,77,67);
 
     println!("{:?}",s);
 
     s.display();
+
+    s.update("math",0);
+    s.display()
 }
 
 
-fn details(id:u32,s: &mut String)->Student{
-    Student { id, name: s.to_string() }
+fn details(id:u32,s: &mut String, physics:u32,biology:u32,math:u32,chemistry:u32,)->Student{
+    Student { id, name: s.to_string(),physics,math,chemistry,biology}
 }
 
 fn print_world(s: &mut String)-> &mut String{
